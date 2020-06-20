@@ -1,0 +1,43 @@
+version: 2.1
+
+jobs:
+  audit_job:
+    docker:
+      - image: circleci/node
+    steps:
+      - checkout
+      - run: # (d1)
+          name: "npm audit結果を.npm_audit.logファイルに格納する"
+          command: |
+            set +e
+            npm audit --parseable | awk -F $'\t' '{print $4}' >> .npm_audit.log
+
+            if [ "$?" -eq 0 ]; then
+              echo "脆弱性のある依存パッケージなし"
+              circleci step halt
+            fi
+      - run: # (d2)
+          name: "GitHub Issueを作成する"
+          command: |
+            body=$(cat .npm_audit.log | sed 's/$/<br>/')
+
+            curl -u "${GITHUB_USER}":"${GITHUB_TOKEN}" -X POST -i \
+                https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/issues \
+                -d @- \<< EOF
+                {
+                    "title": "npm audit",
+                    "body" : "${body}"
+                }
+            EOF
+workflows:
+  version: 2
+  audit:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - audit_job

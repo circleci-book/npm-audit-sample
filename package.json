@@ -1,0 +1,23 @@
+{
+  "name": "npm-audit-sample",
+  "version": "1.0.0",
+  "description": "[![CircleCI](https://circleci.com/gh/circleci-book/npm-audit-sample.svg?style=svg)](https://circleci.com/gh/circleci-book/npm-audit-sample)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/circleci-book/npm-audit-sample.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/circleci-book/npm-audit-sample/issues"
+  },
+  "homepage": "https://github.com/circleci-book/npm-audit-sample#readme",
+  "dependencies": {
+    "lodash": "^4.17.0"
+  }
+}
