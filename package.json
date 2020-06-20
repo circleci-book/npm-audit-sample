@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/circleci-book/npm-audit-sample#readme",
   "dependencies": {
-    "lodash": "^4.17.0"
+    "lodash": "^4.17.13"
   }
 }
