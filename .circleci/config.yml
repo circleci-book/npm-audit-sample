@@ -34,7 +34,10 @@ workflows:
   audit:
     triggers:
       - schedule:
-          cron: "0 0 * * *"
+          # 毎日0時
+          # cron: "0 0 * * *"
+          # 毎月1日0時
+          cron: 0 0 1 * *
           filters:
             branches:
               only:
