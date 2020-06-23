@@ -32,15 +32,13 @@ jobs:
 workflows:
   version: 2
   audit:
-    triggers:
-      - schedule:
-          # 毎日0時
-          # cron: "0 0 * * *"
-          # 毎月1日0時
-          cron: 0 0 1 * *
-          filters:
-            branches:
-              only:
-                - master
+    # 毎日0時に定期実行
+    # triggers:
+    #   - schedule:
+    #       cron: "0 0 * * *"
+    #       filters:
+    #         branches:
+    #           only:
+    #             - master
     jobs:
       - audit_job
